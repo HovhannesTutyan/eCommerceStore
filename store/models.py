@@ -9,6 +9,7 @@ class ProductManager(models.Manager):
 class Category(models.Model):
     name = models.CharField(max_length=255, db_index=True)
     slug = models.SlugField(max_length=255, unique=True)
+    objects = models.Manager()
 
     class Meta:
         verbose_name_plural = 'categories'
@@ -22,7 +23,7 @@ class Product(models.Model):
     title = models.CharField(max_length=255)
     author = models.CharField(max_length=255, default='admin')
     description = models.TextField(blank=True)
-    image = models.ImageField(upload_to='images/')
+    image = models.ImageField(upload_to='images/', default='images/default.png')
     slug = models.SlugField(max_length=255, null=True)
     price = models.DecimalField(max_digits=4, decimal_places=2)
     in_stock = models.BooleanField(default=True)
